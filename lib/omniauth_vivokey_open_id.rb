@@ -1,12 +1,12 @@
 require 'omniauth-oauth2'
 
 module ::OmniAuth
-  module OpenIDConnect
+  module VivoKeyOpenID
     class DiscoveryError < Error; end
   end
 
   module Strategies
-    class OpenIDConnect < OmniAuth::Strategies::OAuth2
+    class VivoKeyOpenID < OmniAuth::Strategies::OAuth2
       option :scope, "openid"
       option :discovery, true
       option :use_userinfo, true
@@ -43,7 +43,7 @@ module ::OmniAuth
 
         discovery_params.each do |internal_key, external_key|
           val = discovery_document[external_key].to_s
-          raise ::OmniAuth::OpenIDConnect::DiscoveryError.new("missing discovery parameter #{external_key}") if val.nil? || val.empty?
+          raise ::OmniAuth::VivoKeyOpenID::DiscoveryError.new("missing discovery parameter #{external_key}") if val.nil? || val.empty?
           options[:client_options][internal_key] = val
         end
 
@@ -54,8 +54,8 @@ module ::OmniAuth
       def request_phase
         begin
           discover! if options[:discovery]
-        rescue ::OmniAuth::OpenIDConnect::DiscoveryError => e
-          fail!(:openid_connect_discovery_error, e)
+        rescue ::OmniAuth::VivoKeyOpenID::DiscoveryError => e
+          fail!(:vivokey_openid_discovery_error, e)
         end
 
         super
@@ -101,8 +101,8 @@ module ::OmniAuth
             return fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected"))
           end
           oauth2_callback_phase
-        rescue ::OmniAuth::OpenIDConnect::DiscoveryError => e
-          fail!(:openid_connect_discovery_error, e)
+        rescue ::OmniAuth::VivoKeyOpenID::DiscoveryError => e
+          fail!(:vivokey_openid_discovery_error, e)
         rescue JWT::DecodeError => e
           fail!(:jwt_decode_failed, e)
         end
@@ -197,4 +197,4 @@ module ::OmniAuth
   end
 end
 
-OmniAuth.config.add_camelization 'openid_connect', 'OpenIDConnect'
+OmniAuth.config.add_camelization 'vivokey_openid', 'VivoKeyOpenID'
