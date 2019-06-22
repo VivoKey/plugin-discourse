@@ -1,6 +1,8 @@
 plugins:
   vivokey_openid_enabled:
     default: false
+  vivokey_openid_registration:
+    default: false
   vivokey_openid_discovery_document:
     default: ""
   vivokey_openid_client_id:

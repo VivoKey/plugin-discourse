@@ -52,9 +52,15 @@ class VivoKeyAuthenticator < Auth::ManagedAuthenticator
   def after_authenticate(auth_token, existing_account: nil)
     result = super(auth_token, existing_account: existing_account)
 
-    # do not consider unverified emails to be valid
+    # Do not consider unverified emails to be valid
     email_verified = !!auth_token[:extra][:raw_info][:email_verified]
     result.email_valid &&= email_verified
+
+    # Fail authentication if no matching account found and registration is not allowed
+    if !result.user && !SiteSetting.vivokey_openid_registration
+      result.failed = true
+      result.failed_reason = I18n.t("vivokey_openid.registration_not_allowed")
+    end
 
     result
   end
