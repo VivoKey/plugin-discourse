@@ -1,11 +1,11 @@
 en:
   site_settings:
-    openid_connect_enabled: Enable OpenID Connect authentication. Customize user interface text <a href='%{base_path}/admin/customize/site_texts?q=js.login.oidc'>here</a>
-    openid_connect_discovery_document: "OpenID Connect discovery document URL. Normally located at 'https://your.domain/.well-known/openid-configuration'"
-    openid_connect_client_id: "OpenID Connect client ID"
-    openid_connect_client_secret: "OpenID Connect client secret"
-    openid_connect_authorize_scope: "The scopes sent to the authorize endpoint. This must include 'openid'."
-    openid_connect_token_scope: "The scopes sent when requesting the token endpoint. The official specification does not require this."
-    openid_connect_error_redirects: "If the callback error_reason contains the first parameter, the user will be redirected to the URL in the second parameter"
-    openid_connect_allow_association_change: "Allow users to disconnect and reconnect their Discourse accounts from the OpenID Connect provider"
-    openid_connect_verbose_logging: "Log detailed openid-connect authentication information to `/logs`. Keep this disabled during normal use."
+    vivokey_openid_enabled: Enable VivoKey OpenID authentication. Customize user interface text <a href='%{base_path}/admin/customize/site_texts?q=js.login.vivokey'>here</a>
+    vivokey_openid_discovery_document: "VivoKey OpenID discovery document URL. Normally located at 'https://your.domain/.well-known/openid-configuration'"
+    vivokey_openid_client_id: "VivoKey OpenID client ID"
+    vivokey_openid_client_secret: "VivoKey OpenID client secret"
+    vivokey_openid_authorize_scope: "The scopes sent to the authorize endpoint. This must include 'openid'."
+    vivokey_openid_token_scope: "The scopes sent when requesting the token endpoint. The official specification does not require this."
+    vivokey_openid_error_redirects: "If the callback error_reason contains the first parameter, the user will be redirected to the URL in the second parameter"
+    vivokey_openid_allow_association_change: "Allow users to disconnect and reconnect their Discourse accounts from the VivoKey OpenID provider"
+    vivokey_openid_verbose_logging: "Log detailed VivoKey OpenID authentication information to `/logs`. Keep this disabled during normal use."

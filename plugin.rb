@@ -1,36 +1,36 @@
-# name: discourse-openid-connect
-# about: Add support for openid-connect as a login provider
+# name: discourse-vivokey-openid
+# about: Add support for VivoKey OpenID as a login provider
 # version: 1.0
 # authors: David Taylor
-# url: https://github.com/discourse/discourse-openid-connect
+# url: https://github.com/VivoKey/plugin-discourse
 
-require_relative "lib/omniauth_open_id_connect"
+require_relative "lib/omniauth_vivokey_open_id"
 
-class OpenIDConnectAuthenticator < Auth::ManagedAuthenticator
+class VivoKeyAuthenticator < Auth::ManagedAuthenticator
 
   def name
-    'oidc'
+    'vivokey'
   end
 
   def can_revoke?
-    SiteSetting.openid_connect_allow_association_change
+    SiteSetting.vivokey_openid_allow_association_change
   end
 
   def can_connect_existing_user?
-    SiteSetting.openid_connect_allow_association_change
+    SiteSetting.vivokey_openid_allow_association_change
   end
 
   def enabled?
-    SiteSetting.openid_connect_enabled
+    SiteSetting.vivokey_openid_enabled
   end
 
   def register_middleware(omniauth)
 
-    omniauth.provider :openid_connect,
-      name: :oidc,
+    omniauth.provider :vivokey_openid,
+      name: :vivokey,
       cache: lambda { |key, &blk| Rails.cache.fetch(key, expires_in: 10.minutes, &blk) },
       error_handler: lambda { |error, message|
-        handlers = SiteSetting.openid_connect_error_redirects.split("\n")
+        handlers = SiteSetting.vivokey_openid_error_redirects.split("\n")
         handlers.each do |row|
           parts = row.split("|")
           return parts[1] if message.include? parts[0]
@@ -38,20 +38,20 @@ class OpenIDConnectAuthenticator < Auth::ManagedAuthenticator
         nil
       },
       verbose_logger: lambda { |message|
-        return unless SiteSetting.openid_connect_verbose_logging
-        Rails.logger.warn("OIDC Log: #{message}")
+        return unless SiteSetting.vivokey_openid_verbose_logging
+        Rails.logger.warn("VivoKey OIDC Log: #{message}")
       },
       setup: lambda { |env|
         opts = env['omniauth.strategy'].options
         opts.deep_merge!(
-          client_id: SiteSetting.openid_connect_client_id,
-          client_secret: SiteSetting.openid_connect_client_secret,
+          client_id: SiteSetting.vivokey_openid_client_id,
+          client_secret: SiteSetting.vivokey_openid_client_secret,
           client_options: {
-            discovery_document: SiteSetting.openid_connect_discovery_document,
+            discovery_document: SiteSetting.vivokey_openid_discovery_document,
           },
-          scope: SiteSetting.openid_connect_authorize_scope,
+          scope: SiteSetting.vivokey_openid_authorize_scope,
           token_params: {
-            scope: SiteSetting.openid_connect_token_scope,
+            scope: SiteSetting.vivokey_openid_token_scope,
           }
         )
       }
@@ -60,8 +60,8 @@ end
 
 # TODO: remove this check once Discourse 2.2 is released
 if Gem.loaded_specs['jwt'].version > Gem::Version.create('2.0')
-  auth_provider authenticator: OpenIDConnectAuthenticator.new(),
+  auth_provider authenticator: VivoKeyAuthenticator.new(),
                 full_screen_login: true
 else
-  STDERR.puts "WARNING: discourse-openid-connect requires Discourse v2.2.0.beta7 or above. The plugin will not be loaded."
+  STDERR.puts "WARNING: discourse-vivokey-openid requires Discourse v2.2.0.beta7 or above. The plugin will not be loaded."
 end

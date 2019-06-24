@@ -1,7 +1,7 @@
 en:
   js:
     login:
-      oidc:
-        name: "OpenID Connect"
-        title: "with OpenID Connect"
-        message: "Authenticating with OpenID Connect"
+      vivokey:
+        name: "VivoKey OpenID"
+        title: "with VivoKey"
+        message: "Authenticating with VivoKey OpenID"

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../../lib/omniauth_open_id_connect'
+require_relative '../../lib/omniauth_vivokey_open_id'
 require 'rails_helper'
 
-describe OmniAuth::Strategies::OpenIDConnect do
+describe OmniAuth::Strategies::VivoKeyOpenID do
   # let(:request) { double('Request', params: {}, cookies: {}, env: {}) }
   let(:app) do
     lambda do |*args|
@@ -22,7 +22,7 @@ describe OmniAuth::Strategies::OpenIDConnect do
   end
 
   subject do
-    OmniAuth::Strategies::OpenIDConnect.new(app, 'appid', 'secret',
+    OmniAuth::Strategies::VivoKeyOpenID.new(app, 'appid', 'secret',
       client_options: {
         discovery_document: "https://id.example.com/.well-known/openid-configuration"
       }
@@ -43,7 +43,7 @@ describe OmniAuth::Strategies::OpenIDConnect do
         "userinfo_endpoint": "https://id.example.com/userinfo",
       }.to_json)
 
-    expect { subject.discover! }.to raise_error(::OmniAuth::OpenIDConnect::DiscoveryError)
+    expect { subject.discover! }.to raise_error(::OmniAuth::VivoKeyOpenID::DiscoveryError)
   end
 
   it "disables userinfo if not included in discovery document" do
