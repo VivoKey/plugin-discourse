@@ -1,6 +1,9 @@
 require_relative "omniauth_vivokey_open_id"
 
 class VivoKeyAuthenticator < Auth::ManagedAuthenticator
+  VIVOKEY_OPENID_DISCOVERY_DOCUMENT = 'https://api.vivokey.com/openid/.well-known/openid-configuration'
+  VIVOKEY_OPENID_AUTHORIZE_SCOPE = 'openid email'
+
   def name
     'vivokey'
   end
@@ -39,9 +42,9 @@ class VivoKeyAuthenticator < Auth::ManagedAuthenticator
           client_id: SiteSetting.vivokey_openid_client_id,
           client_secret: SiteSetting.vivokey_openid_client_secret,
           client_options: {
-            discovery_document: SiteSetting.vivokey_openid_discovery_document,
+            discovery_document: VIVOKEY_OPENID_DISCOVERY_DOCUMENT,
           },
-          scope: SiteSetting.vivokey_openid_authorize_scope,
+          scope: VIVOKEY_OPENID_AUTHORIZE_SCOPE,
           token_params: {
             scope: SiteSetting.vivokey_openid_token_scope,
           }

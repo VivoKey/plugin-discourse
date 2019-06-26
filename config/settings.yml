@@ -3,16 +3,12 @@ plugins:
     default: false
   vivokey_openid_registration:
     default: false
-  vivokey_openid_discovery_document:
-    default: ""
   vivokey_openid_client_id:
     default: ""
   vivokey_openid_client_secret:
     default: ""
   vivokey_openid_allow_association_change:
     default: false
-  vivokey_openid_authorize_scope:
-    default: "openid"
   vivokey_openid_verbose_logging:
     default: false
   vivokey_openid_token_scope:
