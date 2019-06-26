@@ -17,6 +17,10 @@ class VivoKeyAuthenticator < Auth::ManagedAuthenticator
     SiteSetting.vivokey_openid_enabled
   end
 
+  def match_by_email
+    false
+  end
+
   def register_middleware(omniauth)
     omniauth.provider :vivokey_openid,
       name: :vivokey,

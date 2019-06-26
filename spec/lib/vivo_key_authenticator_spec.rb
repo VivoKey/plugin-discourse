@@ -60,8 +60,25 @@ describe VivoKeyAuthenticator do
     end
 
     context 'when account registration is not needed' do
-      before { Fabricate(:user, email: auth_token.dig(:info, :email)) }
+      before do
+        user = Fabricate(:user, email: auth_token.dig(:info, :email))
+        UserAssociatedAccount.create!(user: user, provider_name: auth_token[:provider], provider_uid: auth_token[:uid])
+      end
       it { expect(auth_result).not_to be_failed }
     end
+  end
+
+  it 'matching by email is disabled' do
+    Fabricate(:user, email: auth_token.dig(:info, :email))
+    expect(auth_result.user).to be_nil
+  end
+
+  it 'but connecting existing account is not' do
+    SiteSetting.vivokey_openid_allow_association_change = true
+    user = Fabricate(:user, email: auth_token.dig(:info, :email))
+
+    auth_result = described_class.new.after_authenticate(auth_token, existing_account: user)
+
+    expect(auth_result.user).to eq user
   end
 end
