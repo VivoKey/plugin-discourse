@@ -5,3 +5,7 @@ en:
         name: "VivoKey OpenID"
         title: "with VivoKey"
         message: "Authenticating with VivoKey OpenID"
+    user:
+      email:
+        ok: "We will email you to verify"
+        authenticated: "Your email address is verified by {{provider}}"
