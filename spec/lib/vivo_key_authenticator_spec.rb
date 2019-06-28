@@ -71,6 +71,7 @@ describe VivoKeyAuthenticator do
   it 'matching by email is disabled' do
     Fabricate(:user, email: auth_token.dig(:info, :email))
     expect(auth_result.user).to be_nil
+    expect(auth_result.email_valid).to be false
   end
 
   it 'but connecting existing account is not' do
