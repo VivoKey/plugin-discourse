@@ -69,6 +69,15 @@ class VivoKeyAuthenticator < Auth::ManagedAuthenticator
       result.failed_reason = I18n.t("vivokey_openid.registration_not_allowed")
     end
 
+    # If logged in with email taken by another user
+    if result.user.nil? && (user = User.find_by_email(auth_token.dig(:info, :email)))
+      # and matching by email is disabled
+      unless match_by_email
+        # mark email as invalid
+        result.email_valid = false
+      end
+    end
+
     result
   end
 end
