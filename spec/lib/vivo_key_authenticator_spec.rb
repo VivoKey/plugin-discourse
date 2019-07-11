@@ -75,7 +75,7 @@ describe VivoKeyAuthenticator do
   end
 
   it 'but connecting existing account is not' do
-    SiteSetting.vivokey_openid_allow_association_change = true
+    SiteSetting.vivokey_openid_allow_connect = true
     user = Fabricate(:user, email: auth_token.dig(:info, :email))
 
     auth_result = described_class.new.after_authenticate(auth_token, existing_account: user)

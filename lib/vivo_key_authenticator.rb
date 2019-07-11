@@ -9,11 +9,11 @@ class VivoKeyAuthenticator < Auth::ManagedAuthenticator
   end
 
   def can_revoke?
-    SiteSetting.vivokey_openid_allow_association_change
+    SiteSetting.vivokey_openid_allow_disconnect
   end
 
   def can_connect_existing_user?
-    SiteSetting.vivokey_openid_allow_association_change
+    SiteSetting.vivokey_openid_allow_connect
   end
 
   def enabled?

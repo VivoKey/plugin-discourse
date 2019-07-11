@@ -7,7 +7,9 @@ plugins:
     default: ""
   vivokey_openid_client_secret:
     default: ""
-  vivokey_openid_allow_association_change:
+  vivokey_openid_allow_connect:
+    default: true
+  vivokey_openid_allow_disconnect:
     default: false
   vivokey_openid_verbose_logging:
     default: false
