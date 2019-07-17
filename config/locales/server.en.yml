@@ -6,7 +6,8 @@ en:
     vivokey_openid_client_secret: "VivoKey OpenID client secret"
     vivokey_openid_token_scope: "The scopes sent when requesting the token endpoint. The official specification does not require this."
     vivokey_openid_error_redirects: "If the callback error_reason contains the first parameter, the user will be redirected to the URL in the second parameter"
-    vivokey_openid_allow_association_change: "Allow users to disconnect and reconnect their Discourse accounts from the VivoKey OpenID provider"
+    vivokey_openid_allow_connect: "Allow users to connect their Discourse accounts to the VivoKey OpenID provider"
+    vivokey_openid_allow_disconnect: "Allow users to disconnect their Discourse accounts from the VivoKey OpenID provider"
     vivokey_openid_verbose_logging: "Log detailed VivoKey OpenID authentication information to `/logs`. Keep this disabled during normal use."
   vivokey_openid:
     registration_not_allowed: "Account registration via VivoKey OpenID is not allowed."
