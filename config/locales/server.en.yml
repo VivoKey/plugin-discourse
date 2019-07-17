@@ -11,3 +11,34 @@ en:
     vivokey_openid_verbose_logging: "Log detailed VivoKey OpenID authentication information to `/logs`. Keep this disabled during normal use."
   vivokey_openid:
     registration_not_allowed: "Account registration via VivoKey OpenID is not allowed."
+
+  vivokey:
+    forgot_password:
+      title: "Forgot Password"
+      subject_template: "[%{email_prefix}] Password reset"
+      text_body_template: |
+        Somebody asked to reset your password on [%{site_name}](%{base_url}).
+
+        If it was not you, you can safely ignore this email.
+
+        You cannot request a new password. You must log in using your VivoKey.
+
+    set_password:
+      title: "Set Password"
+      subject_template: "[%{email_prefix}] Set Password"
+      text_body_template: |
+        Somebody asked to add a password to your account on [%{site_name}](%{base_url}).
+
+        If you did not make this request, you can safely ignore this email.
+
+        You cannot request a password. You must log in using your VivoKey.
+
+    email_login:
+      title: "Log in via link"
+      subject_template: "[%{email_prefix}] Log in via link"
+      text_body_template: |
+        Someone requested a log in at [%{site_name}](%{base_url}).
+
+        If you did not request this link, you can safely ignore this email.
+
+        You cannot request a log in link. You must log in using your VivoKey.
